@@ -22,15 +22,15 @@ const Card = (article) => {
   headline.classList.add("headline");
   author.classList.add("author");
   imgContainer.classList.add("img-container");
-  cardImg.src = ""; //---comeback---
+  cardImg.src = article.authorPhoto; //---comeback---
 
   //pass in content 
-  headline.textContent = "";//---comeback---
-  authorName.textContent = ""; //---comeback---
+  headline.textContent = article.headline;//---comeback---
+  authorName.textContent = article.authorName; //---comeback---
 
   //add functionality 
   cardContainer.addEventListener("click", event=>{
-    console.log("headline"); //---comeback---
+    console.log(article.headline); //---comeback---
   })
 
   return cardContainer;
@@ -66,13 +66,13 @@ const cardAppender = (selector) => {
       const jqueryArticles = response.data.articles.jquery;
       const nodeArticles = response.data.articles.node;
 
-      console.log(jsArticles);
+      console.log(Card(jsArticles[0]));
 
-      jsArticles.forEach(obj => {
-        entryPoint.appendChild(obj);
+      jsArticles.forEach(article => {
+        console.log(article);
+        entryPoint.appendChild(Card(jsArticles[article]));
       })
 
-      Card(jsArticles);
     })
     .catch(err =>{
       console.error(err)
