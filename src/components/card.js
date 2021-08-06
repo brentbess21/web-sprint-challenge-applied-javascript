@@ -74,6 +74,49 @@ const cardAppender = (selector) => {
           entryPoint.appendChild(Card(article));
         })
       })
+
+      //functionality 
+      const jsBtn = document.querySelector(".tab:nth-of-type(1)");
+      const bsBtn = document.querySelector(".tab:nth-of-type(2)");
+      const techBtn = document.querySelector(".tab:nth-of-type(3)");
+      const jqBtn = document.querySelector(".tab:nth-of-type(4)");
+      const nodeBtn = document.querySelector(".tab:nth-of-type(5)");
+
+      jsBtn.addEventListener("click", event=>{
+        entryPoint.innerHTML = "";
+        jsArticles.forEach(article =>{
+          entryPoint.appendChild(Card(article));
+        })
+      })
+
+      bsBtn.addEventListener("click", event=>{
+        entryPoint.innerHTML = "";
+        bootstrapArticles.forEach(article =>{
+          entryPoint.appendChild(Card(article));
+        })
+      })
+
+      techBtn.addEventListener("click", event=>{
+        entryPoint.innerHTML = "";
+        techArticles.forEach(article =>{
+          entryPoint.appendChild(Card(article));
+        })
+      })
+
+      jqBtn.addEventListener("click", event=>{
+        entryPoint.innerHTML = "";
+        jqueryArticles.forEach(article =>{
+          entryPoint.appendChild(Card(article));
+        })
+      })
+
+      nodeBtn.addEventListener("click", event=>{
+        entryPoint.innerHTML = "";
+        nodeArticles.forEach(article =>{
+          entryPoint.appendChild(Card(article));
+        })
+      })
+
     })
     .catch(err =>{
       console.error(err)
