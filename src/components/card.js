@@ -22,15 +22,15 @@ const Card = (article) => {
   headline.classList.add("headline");
   author.classList.add("author");
   imgContainer.classList.add("img-container");
-  cardImg.src = article.authorPhoto; //---comeback---
+  cardImg.src = article.authorPhoto;
 
   //pass in content 
-  headline.textContent = article.headline;//---comeback---
-  authorName.textContent = article.authorName; //---comeback---
+  headline.textContent = article.headline;
+  authorName.textContent = article.authorName; 
 
   //add functionality 
   cardContainer.addEventListener("click", event=>{
-    console.log(article.headline); //---comeback---
+    console.log(article.headline);
   })
 
   return cardContainer;
@@ -58,21 +58,22 @@ const Card = (article) => {
 const cardAppender = (selector) => {
   axios.get(`http://localhost:5000/api/articles`)
     .then(response =>{
-      console.log(response);
       const entryPoint = document.querySelector(selector);
+
       const jsArticles = response.data.articles.javascript;
       const bootstrapArticles = response.data.articles.bootstrap;
       const techArticles = response.data.articles.technology;
       const jqueryArticles = response.data.articles.jquery;
       const nodeArticles = response.data.articles.node;
 
-      console.log(Card(jsArticles[0]));
+      const topicArray = [jsArticles, bootstrapArticles, techArticles, jqueryArticles, nodeArticles];
 
-      jsArticles.forEach(article => {
-        console.log(article);
-        entryPoint.appendChild(Card(jsArticles[article]));
+
+      topicArray.forEach(topic =>{
+        topic.forEach(article => {
+          entryPoint.appendChild(Card(article));
+        })
       })
-
     })
     .catch(err =>{
       console.error(err)

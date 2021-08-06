@@ -5,38 +5,15 @@ const Tabs = (topics) => {
   //create elements
   const topicsContainer = document.createElement("div");
   //create a tab div for each number of topics in array:
-  //---COME BACK TO THIS---
-  // const topicsTabs = topics.forEach(topic, event=> {
-  // })
-  // For now just hardcode it based on api data
-  const tab1 = document.createElement("div");
-  const tab2 = document.createElement("div");
-  const tab3 = document.createElement("div");
-  const tab4 = document.createElement("div");
-  const tab5 = document.createElement("div");
+  const topicsTabs = topics.forEach(topic => {
+    const tab = document.createElement("div");
+    tab.classList.add("tab");
+    tab.textContent = topic
+    topicsContainer.appendChild(tab)
+  });
 
-  //create structure
-  topicsContainer.appendChild(tab1)
-  topicsContainer.appendChild(tab2)
-  topicsContainer.appendChild(tab3)
-  topicsContainer.appendChild(tab4)
-  topicsContainer.appendChild(tab5)
-
-  //attach classes
   topicsContainer.classList.add("topics");
-  tab1.classList.add("tab");
-  tab2.classList.add("tab");
-  tab3.classList.add("tab");
-  tab4.classList.add("tab");
-  tab5.classList.add("tab");
-
-  //pass in content
-  tab1.textContent = topics[0];
-  tab2.textContent = topics[1];
-  tab3.textContent = topics[2];
-  tab4.textContent = topics[3];
-  tab5.textContent = topics[4];
-
+  
   return topicsContainer;
 
   // TASK 3
@@ -58,6 +35,7 @@ const Tabs = (topics) => {
 const tabsAppender = (selector) => {
 
   const entryPoint = document.querySelector(selector);
+  
   axios.get(`http://localhost:5000/api/topics`)
     .then(response =>{
       entryPoint.appendChild(Tabs(response.data.topics))
