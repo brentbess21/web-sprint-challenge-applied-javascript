@@ -1,4 +1,40 @@
+import axios from "axios";
+
 const Card = (article) => {
+
+  //create elements
+  const cardContainer = document.createElement("div");
+  const headline = document.createElement("div");
+  const author = document.createElement("div");
+  const imgContainer = document.createElement("div");
+  const cardImg = document.createElement("img");
+  const authorName = document.createElement("span");
+
+  //create structure
+  cardContainer.appendChild(headline);
+  cardContainer.appendChild(author);
+  author.appendChild(imgContainer);
+  author.appendChild(authorName);
+  imgContainer.appendChild(cardImg);
+
+  //add attributes
+  cardContainer.classList.add("card");
+  headline.classList.add("headline");
+  author.classList.add("author");
+  imgContainer.classList.add("img-container");
+  cardImg.src = ""; //---comeback---
+
+  //pass in content 
+  headline.textContent = "";//---comeback---
+  authorName.textContent = ""; //---comeback---
+
+  //add functionality 
+  cardContainer.addEventListener("click", event=>{
+    console.log("headline"); //---comeback---
+  })
+
+  return cardContainer;
+
   // TASK 5
   // ---------------------
   // Implement this function, which should return the markup you see below.
@@ -20,6 +56,27 @@ const Card = (article) => {
 }
 
 const cardAppender = (selector) => {
+  axios.get(`http://localhost:5000/api/articles`)
+    .then(response =>{
+      console.log(response);
+      const entryPoint = document.querySelector(selector);
+      const jsArticles = response.data.articles.javascript;
+      const bootstrapArticles = response.data.articles.bootstrap;
+      const techArticles = response.data.articles.technology;
+      const jqueryArticles = response.data.articles.jquery;
+      const nodeArticles = response.data.articles.node;
+
+      console.log(jsArticles);
+
+      jsArticles.forEach(obj => {
+        entryPoint.appendChild(obj);
+      })
+
+      Card(jsArticles);
+    })
+    .catch(err =>{
+      console.error(err)
+    })
   // TASK 6
   // ---------------------
   // Implement this function that takes a css selector as its only argument.
@@ -29,5 +86,6 @@ const cardAppender = (selector) => {
   // Append each card to the element in the DOM that matches the selector passed to the function.
   //
 }
+
 
 export { Card, cardAppender }
